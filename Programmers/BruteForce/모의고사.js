@@ -32,7 +32,7 @@ function solution(answers) {
 
 //2트
 function solution(answers) {
-    let answer = [0, 0, 0];
+    let answer = new Array(3).fill(0);
     const students = [[1, 2, 3, 4, 5], [2, 1, 2, 3, 2, 4, 2, 5], [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]];
     let result = []
     answers.map((t, index) => {
