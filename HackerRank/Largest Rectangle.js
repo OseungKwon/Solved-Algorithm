@@ -29,7 +29,7 @@ function largestRectangle(h) {
     })
     return result
 }
-*/
+*///
 // 2트+주석 추가
 function largestRectangle(heights) {
     let result = 0;
