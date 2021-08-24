@@ -3,7 +3,7 @@ function solution(begin, target, words) {
     words.unshift(begin)
     let temp = []
     let visited = new Array(words.length).fill(false);
-
+    // 데이터 전처리
     for (let i = 0; i < words.length; i++) {
         let nodes = []
         let at = words[i].split('')
@@ -26,10 +26,11 @@ function solution(begin, target, words) {
 
         temp.push(nodes)
     }
-    console.log('temp', temp)
+    //console.log('temp', temp)
 
     var cnt = 0;
 
+    // bfs로 깊이를 측적하면서(cnt)  풀었다.
     const bfs = (graph, computer, visited) => {
         cnt++;
         let k = words.indexOf(computer);
@@ -38,7 +39,7 @@ function solution(begin, target, words) {
 
         while (queue.length !== 0) {
             const node = queue.shift();
-            console.log(node)
+            //console.log(node)
             let k = words.indexOf(node);
             if (graph[k].find(g => g === target)) {
                 return;
