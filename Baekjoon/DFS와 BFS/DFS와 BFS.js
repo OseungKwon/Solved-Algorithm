@@ -1,73 +1,67 @@
-var arr = [
-  [5, 4],
-  [5, 2],
-  [1, 2],
-  [3, 4],
-  [3, 1]
-];
-var graph = new Map();
-/*
-arr.forEach(a=>{
-  if(graph.get(a[0])){
-    if(typeof(graph.get(a[0]))==='number'){
-      graph.set(a[0],[graph.get(a[0]),a[1]])
-    }else{
-      graph.set(a[0],[...graph.get(a[0]),a[1]])
-    }
-  }else{
-    graph.set(a[0],a[1])
-  }
-})
-*/
-var start = 3;
+let DFS = function (num) {
+	visitedDfs[num] = true;
+	dfsResult.push(num);
 
-arr.forEach((a) => {
-  if (graph.get(a[0])) {
-    graph.set(a[0], [...graph.get(a[0]), a[1]]);
-  } else {
-    graph.set(a[0], [a[1]]);
+	for (let i = 1; i < graph.length; i++) {
+		if (graph[num][i] === 1 && visitedDfs[i] === false) {
+			DFS(i);
+		}
   }
-  if (graph.get(a[1])) {
-    graph.set(a[1], [...graph.get(a[1]), a[0]]);
-  } else {
-    graph.set(a[1], [a[0]]);
+  return;
+};
+
+let BFS = function (num) {
+	let queue = [];
+	queue.push(num);
+	bfsResult.push(num);
+
+  while (queue.length !== 0) {
+    let shiftQueue = queue.shift()
+    visitedBfs[shiftQueue] = true;
+    
+    for (let i = 1; i < graph.length; i++) {
+      if (graph[shiftQueue][i] === 1 && visitedBfs[i] === false) {
+        visitedBfs[i] = true;
+        queue.push(i);
+        bfsResult.push(i);
+      }
+    }
   }
+  return;
+};
+
+const readline = require("readline");
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
 });
+let input = [];
+let graph = [];
+let visitedDfs = [];
+let visitedBfs = [];
+let dfsResult = [];
+let bfsResult = [];
 
-console.log("g", graph);
+rl.on("line", function (line) {
+	input.push(line.toString());
+}).on("close", function () {
+	let [node, edge, num] = input
+		.shift()
+		.split(" ")
+		.map((el) => Number(el));
+	graph = Array.from(Array(node + 1), () => Array(node + 1).fill(0));
 
-//BFS
+	for (let i of input) {
+		let [x, y] = i.split(" ").map((el) => Number(el));
+		graph[x][y] = 1;
+		graph[y][x] = 1;
+	}
 
-function BFS(graph, start) {
-  var front = [];
-  var back = [];
+	visitedDfs = new Array(node + 1).fill(false);
+	visitedBfs = new Array(node + 1).fill(false);
+	DFS(num);
+	BFS(num);
 
-  front.push(start);
-  while (front.length !== 0) {
-    var node = front.pop();
-    if (!back.includes(node)) {
-      back.push(node);
-      front = [...front, ...graph.get(node).sort((a, b) => b - a)];
-    }
-  }
-  return back;
-}
-console.log(BFS(graph, start));
-
-//BFS
-
-function DFS(graph, start) {
-  var front = [];
-  var back = [];
-
-  front.push(start);
-  while (front.length !== 0) {
-    var node = front.shift();
-    if (!back.includes(node)) {
-      back.push(node);
-      front = [...front, ...graph.get(node).sort((a, b) => a - b)];
-    }
-  }
-  return back;
-}
-console.log(DFS(graph, start));
+	console.log(dfsResult.join(" ") + "\n" + bfsResult.join(" "));
+	process.exit();
+});
