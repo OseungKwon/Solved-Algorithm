@@ -2,7 +2,12 @@ const fs = require("fs");
 const stdin = (
   process.platform === "linux"
     ? fs.readFileSync("/dev/stdin").toString()
-    : `1 0 1
+    : `4 5 1
+1 2
+1 3
+1 4
+2 4
+3 4
 `
 ).split("\n");
 
@@ -31,6 +36,7 @@ if (limit === 0) {
       graph.set(data[1], [data[0]]);
     }
   }
+
   function BFS(graph, start) {
     var front = [];
     var back = [];
@@ -46,27 +52,6 @@ if (limit === 0) {
     return back;
   }
   console.log(...BFS(graph, start));
-
-  //BFS
-
-  // function DFS(graph, start) {
-  //   var v = 0;
-  //   var front = [];
-  //   var back = [];
-
-  //   front.push(start);
-  //   while (back.length !== len) {
-  //     var node = front[v];
-  //     if (!back.includes(node)) {
-  //       back.push(node);
-  //       front = [...front.slice(0), ...graph.get(node).sort((a, b) => a - b)];
-  //       //console.log(front, back);
-  //     }
-  //     v++;
-  //   }
-  //   return back;
-  // }
-  // console.log(...DFS(graph, start));
 
   function DFS(graph, start) {
     var front = [];
