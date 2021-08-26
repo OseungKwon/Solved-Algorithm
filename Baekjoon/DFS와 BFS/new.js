@@ -38,7 +38,5 @@ if (limit === 0) {
   }
 }
 console.log(graph);
-console.log(graph.size);
 const visited = new Array(graph.size).fill(false);
-console.log(visited);
 function DFS(graph, visited) {}
