@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const a = []
 const fs = require('fs');
 const stdin = `5
@@ -8,20 +7,6 @@ BBBRR
 BBRRR
 RRRRR
 `.split('\n');
-=======
-const fs = require("fs");
-const stdin = (
-  process.platform === "linux"
-    ? fs.readFileSync("/dev/stdin").toString()
-    : `4 5 1
-1 2
-1 3
-1 4
-2 4
-3 4
-`
-).split("\n");
->>>>>>> a737b22020e66735ba9a8029e69de5cab6ed9b5f
 
 const input = (() => {
   let line = 0;
