@@ -1,0 +1,67 @@
+// 답은 맞지만 효율성 테스트에서 통과 X
+/*
+function solution(people, limit) {
+    let answer = 0;
+    people.sort((a,b)=>a-b);
+    while(people.length!==0){
+        const first = people.shift()
+        let len = people.length;
+        for(let i=people.length-1;i>=0;i--){
+            if((first+people[i])<=limit){
+                people.splice(i,1)
+                answer+=1;
+                break;
+            }
+        }
+        //console.log(len,people.length)
+        if(people.length===len){
+            answer+=1;
+        }
+    }
+    return answer;
+}
+// 50,50,70,80
+*/
+/* 2차 시도 shift 대신 index 사용 => 여전히 효율성 X
+function solution(people, limit) {
+    let answer = 0;
+    people.sort((a,b)=>a-b);
+    let count=0;
+    while(people.length!==count){
+        const first = people[count++]
+        let len = people.length;
+        for(let i=people.length-1;i>=count;i--){
+            if((first+people[i])<=limit){
+                people.splice(i,1)
+                answer+=1;
+                break;
+            }
+        }
+        //console.log(len,people.length)
+        if(people.length===len){
+            answer+=1;
+        }
+    }
+    return answer;
+}
+// 50,50,70,80
+*/
+function solution(people, limit) {
+	let answer = 0;
+	people.sort((a, b) => b - a);
+	let start = 0;
+	let end = people.length - 1;
+	while (start < end) {
+		if (people[start] + people[end] <= limit) {
+			end--;
+			start++;
+		} else {
+			start++;
+		}
+		answer++;
+	}
+	if (start === end) {
+		answer++;
+	}
+	return answer;
+}
