@@ -17,29 +17,22 @@
         }
     }
 }*/
-// 오랜만에 다시 풂 2트
 function solution(priorities, location) {
-    let answer = 0;
-    let max = [...priorities];
-    max = max.sort((a, b) => b - a)
+  let answer = 0;
+  let queue = [];
+  priorities.forEach((t, i) => {
+    queue.push({ index: i, priority: t });
+  });
 
-    let prioArr = []
-    priorities.forEach((t, i) => {
-        prioArr.push({ index: i, priority: t })
-    })
-
-    while (prioArr.length > 0) {
-        if (prioArr[0].priority === max[0]) {
-            answer++;
-            if (prioArr[0].index === location) {
-                return answer;
-            }
-            prioArr.shift();
-            max.shift();
-        } else {
-            prioArr.push(prioArr.shift())
-        }
+  while (queue.length > 0) {
+    let docx = queue.shift();
+    if (queue.find((p) => p.priority > docx.priority)) {
+      queue.push(docx);
+    } else {
+      answer++;
+      if (docx.index === location) {
+        return answer;
+      }
     }
-
-    return answer;
+  }
 }
