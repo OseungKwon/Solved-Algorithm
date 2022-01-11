@@ -26,12 +26,13 @@ function solution(numbers) {
 }
 */
 // 2트
-// 문자열 비교 시에 '10'>'1' 이 true값이 나오는 문제가 있었는데, 
+// 문자열 비교 시에 '10'>'1' 이 true값이 나오는 문제가 있었는데,
 // 이는 sort시에 각 요소를 더한 값을 비교하므로써 해결했다.
 function solution(numbers) {
-    let answer = '';
-    const numbersToString = numbers.map(num => String(num))
-    numbersToString.sort((a, b) => (b + a) - (a + b))
-    answer = numbersToString.join('')
-    return answer[0] === '0' ? '0' : answer;
+  let answer = "";
+  const numbersToString = numbers.map((num) => String(num));
+  numbersToString.sort((a, b) => b + a - (a + b));
+  answer = numbersToString.join("");
+  return answer[0] === "0" ? "0" : answer;
 }
+// https://velog.io/@wkahd01/프로그래머스-정렬-문제풀이
